@@ -1,0 +1,16 @@
+<%= render 'layouts/header' %>
+
+<h1>Update user #<%= @user['id'] %></h1>
+
+<p id="notice"><%= @user.errors.full_messages.first if @user.errors.any? %></p>
+
+<%= simple_form_for @user do |f| %>
+	<%= f.input :first_name %>
+	<%= f.input :last_name %>
+	<%= f.input :email_address %>
+	<%= f.input :password %>
+	<%= f.button :submit %>
+<% end %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>
