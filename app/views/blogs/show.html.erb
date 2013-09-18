@@ -1,2 +1,22 @@
-<h1>Blogs#show</h1>
-<p>Find me in app/views/blogs/show.html.erb</p>
+<h1>Display Blog</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table class="users table">
+	<tr>
+		<th>ID</th>
+		<th>Blog Name</th>
+		<th>Description</th>
+	</tr>
+		<tr>
+			<td><%= @blog['id'] %></td>		
+		    <td><%= @blog['name'] %></td>
+		    <td><%= @blog['description'] %></td>
+		</tr>
+</table>
+
+<% if signed_in? %>
+	<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<% else %>
+<% end %>
+<%= link_to 'Back', blogs_path %>

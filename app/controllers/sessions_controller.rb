@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   		render :new
   	else
   		sign_in user
-  		redirect_to users_path
+  		redirect_to blogs_path
   		# redirect_to user
   	end
 

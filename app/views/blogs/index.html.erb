@@ -1,2 +1,40 @@
-<h1>Blogs#index</h1>
-<p>Find me in app/views/blogs/index.html.erb</p>
+<%= render 'layouts/header' %>
+
+<h1>Display all Blogs</h1>
+
+<p id="notice"><%= flash[:notice] %></p>
+
+<table class="table table-striped">
+	<tr>
+		<th>ID</th>
+		<th>Blog Name</th>
+		<th>Description</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @blogs.each do |blog| %>
+		<tr>
+			<td><%= blog['id'] %></td>		
+		    <td><%= blog['name'] %></td>
+		    <td><%= blog['description'] %></td>
+		    <% if signed_in? %>
+			    <td><a href="/blogs/<%= blog['id'] %>/"><button type="button">Show</button></a></td>
+			    <td><a href="/blogs/<%= blog['id'] %>/edit"><button type="button">Edit</button></a></td>
+			    <td>
+			    	<form action="/blogs/<%= blog['id'] %>" method="post">  
+						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+						<input type='hidden' name="_method" value="delete">
+						<input type="submit" value="Delete" />
+					</form>
+			    </td>
+			<% else %>
+				<td><a href="/blogs/<%= blog['id'] %>/"><button type="button">Show</button></a></td>
+				<td></td>
+				<td></td>
+			<% end %>
+		</tr>
+	<% end %>     
+</table>
+
+<%= link_to 'New Blog', new_blog_path %>

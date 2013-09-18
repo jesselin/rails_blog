@@ -1,2 +1,14 @@
-<h1>Blogs#edit</h1>
-<p>Find me in app/views/blogs/edit.html.erb</p>
+<%= render 'layouts/header' %>
+
+<h1>Update blog #<%= @blog['id'] %></h1>
+
+<p id="notice"><%= @blog.errors.full_messages.first if @blog.errors.any? %></p>
+
+<%= simple_form_for @blog do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, :as => :text %>
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to 'Show', @blog %> |
+<%= link_to 'Back', blogs_path %>

@@ -1,5 +1,6 @@
 RailsBlog::Application.routes.draw do
 
+  resources :owners
   resources :blogs
   resources :posts
   resources :messages
@@ -10,7 +11,7 @@ RailsBlog::Application.routes.draw do
   get "/signin",  :to => 'sessions#new'
   get "/signout", :to => 'sessions#destroy'
 
-  root :to => 'users#index'
+  root :to => 'blogs#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

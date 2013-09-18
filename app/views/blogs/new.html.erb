@@ -1,2 +1,20 @@
-<h1>Blogs#new</h1>
-<p>Find me in app/views/blogs/new.html.erb</p>
+<h1>New Blog</h1>
+
+<p id="notice"><%= @blog.errors.full_messages.first if @blog.errors.any? %></p>
+
+<%= simple_form_for(@blog) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, :as => :text %>
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to 'Back', users_path %>
+
+<!-- 
+<form action="/blogs" method="post">  
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">  
+	<input type="text" name="name" placeholder="name" /><br> 
+	<input type="text" name="content" placeholder="content" />  
+	<textarea name="description" placeholder="description" ></textarea><br>  
+	<input type="submit" value="Create Blog" />
+</form> -->
