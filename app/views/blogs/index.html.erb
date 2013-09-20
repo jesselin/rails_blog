@@ -26,13 +26,7 @@
 				    <td><%= blog['name'] %></td>
 				    <td><%= blog['description'] %></td>
 				    <td><a href="/blogs/<%= blog['id'] %>/edit"><button class="btn btn-small btn-success">Edit</button></a></td>
-				    <td>
-				    	<form action="/blogs/<%= blog['id'] %>" method="post">  
-							<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-							<input type='hidden' name="_method" value="delete">
-							<input class="btn btn-small btn-danger" type="submit" value="Delete" />
-						</form>
-				    </td>
+				    <td><%= link_to 'Delete', blog, method: :delete, class: 'btn btn-small btn-danger', data: { confirm: 'Are you sure?'} %></td>
 				</tr>
 			<% end %>  
 		<% end %>     
@@ -47,9 +41,6 @@
 			<th>Blog Name</th>
 			<th>Description</th>
 			<th>Owner</th>
-			<th></th>
-			<th></th>
-			<th></th>
 		</tr>
 		<% User.where('id != ?', current_user.id).each do |user|
 			user.blogs.each do |blog| %>
@@ -59,8 +50,6 @@
 				    <td><%= blog['name'] %></td>
 				    <td><%= blog['description'] %></td>		 
 					<td><%= user['first_name'] %> <%= user['last_name'] %></td>
-					<td></td>
-					<td></td>
 				</tr>
 			<% end %>
 		<% end %>
@@ -78,9 +67,6 @@
 			<th>Blog Name</th>
 			<th>Description</th>
 			<th>Owner</th>
-			<th></th>
-			<th></th>
-			<th></th>
 		</tr>
 		<% User.all.each do |user|
 			user.blogs.each do |blog| %>
@@ -90,9 +76,6 @@
 				    <td><%= blog['name'] %></td>
 				    <td><%= blog['description'] %></td>
 				    <td><%= user['first_name'] %> <%= user['last_name'] %></td>
-					<td></td>
-					<td></td>
-					<td></td>
 				</tr>
 			<% end %> 	
 		<% end %>     
