@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   	else
   		sign_in user
   		redirect_to blogs_path
-  		# redirect_to user
+      # render text: user
   	end
 
   end

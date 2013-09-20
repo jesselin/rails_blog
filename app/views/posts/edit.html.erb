@@ -1,2 +1,14 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<%= render 'layouts/header' %>
+
+<h1>Update Post #<%= @post['id'] %></h1>
+
+<p id="notice"><%= @post.errors.full_messages.first if @post.errors.any? %></p>
+
+<%= simple_form_for([@blog, @post]) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content, :as => :text %>
+  <%= f.button :submit, value: 'Update Post' , :class => 'btn btn-large btn-primary' %>
+<% end %>
+
+<%= link_to 'Show', blog_post_path(@blog, @post) %> |
+<%= link_to 'Back', blog_posts_path(@blog) %>

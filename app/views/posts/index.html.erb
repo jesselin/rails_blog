@@ -1,2 +1,39 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<%= render 'layouts/header' %>
+
+<h1>Display all Posts</h1>
+<%= link_to 'New Post', new_blog_post_path, class: "btn btn-large btn-info" %>
+
+<p id="notice"><%= flash[:notice] %></p>
+
+<table class="table table-striped">
+	<tr>
+		<th>ID</th>
+		<th>Post Name</th>
+		<th>Description</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @posts.each do |post| %>
+		<tr>
+			<td><%= post['id'] %></td>		
+		    <td><%= post['title'] %></td>
+		    <td><%= post['content'] %></td>
+		    <% if signed_in? %>
+			    <td><a href="/blogs/<%= @blog.id %>/posts/<%= post['id'] %>/"><button class="btn btn-small btn-primary">Show</button></a></td>
+			    <td><a href="/blogs/<%= @blog.id %>/posts/<%= post['id'] %>/edit"><button class="btn btn-small btn-success">Edit</button></a></td>
+			    <td>
+			     	<form action="/blogs/<%= @blog.id %>/posts/<%= post['id'] %>" method="post">  
+						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+						<input type='hidden' name="_method" value="delete">
+						<input class="btn btn-small btn-danger" type="submit" value="Delete" />
+					</form>
+			    </td>
+			<% else %>
+				<td><a href="/posts/<%= post['id'] %>/"><button type="button">Show</button></a></td>
+				<td></td>
+				<td></td>
+			<% end %>
+		</tr>
+	<% end %>     
+</table>

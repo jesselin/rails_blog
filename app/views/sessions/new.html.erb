@@ -3,9 +3,9 @@
 <p id="notice"><%= flash[:error] %></p>
 
 <%= simple_form_for(:session, :url => sessions_path) do |f| %>
-  <%= f.input :email %>
+  <%= f.input :email_address %>
   <%= f.input :password %>
-  <%= f.button :submit %>
+  <%= f.button :submit, value: 'Sign In' , :class => 'btn btn-large btn-primary' %>
 <% end %>
 
-<%= link_to 'Back', users_path %>
+<%= link_to 'Create Account', new_user_path %>

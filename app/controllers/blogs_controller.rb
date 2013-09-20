@@ -1,6 +1,8 @@
 class BlogsController < ApplicationController
   def index
     @blogs = Blog.all
+    @owners = Owner.all
+    # @owner = Owner.find(params[:id])
   end
 
   def new
@@ -10,7 +12,6 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(blog_params)
-    # @owner = Owner.new(owner_params)
     if @blog.save
       @owner = Owner.new
       @owner[:user_id] = current_user.id
@@ -57,16 +58,9 @@ class BlogsController < ApplicationController
       @blog = Blog.find(params[:id])
     end
 
-    def set_owner
-      @owner = Owner.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
       params.require(:blog).permit([:name, :description])
     end
 
-    def owner_params
-      params.require(:owner).permit([:user_id, :blog_id])
-    end
 end
