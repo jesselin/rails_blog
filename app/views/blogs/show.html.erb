@@ -20,13 +20,15 @@
 		<% User.where("id = '#{post.user_id}'").each do |post_user| %>
 			<%= post_user.first_name %> <%= post_user.last_name %>
 		<% end %>
-		at <%= post['created_at'] %>
+		at <%= post['created_at'] %> - 
+		<%= link_to 'Edit', edit_blog_post_path(@blog, post) %>
 	</p>
 	
 	<div class="well">
     	<h4><%= post['title'] %></h4>
     	<p><%= post['content'] %></p>
     </div>
+
 	<br> 
 <% end %>
 

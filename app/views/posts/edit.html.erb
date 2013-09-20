@@ -10,5 +10,10 @@
   <%= f.button :submit, value: 'Update Post' , :class => 'btn btn-large btn-primary' %>
 <% end %>
 
-<%= link_to 'Show', blog_post_path(@blog, @post) %> |
-<%= link_to 'Back', blog_posts_path(@blog) %>
+<form action="/blogs/<%= @blog.id %>/posts/<%= @post['id'] %>" method="post">  
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type='hidden' name="_method" value="delete">
+	<input class="btn btn-small btn-danger" type="submit" value="Delete" />
+</form>
+
+<%= link_to 'Back', blog_path(@blog) %>

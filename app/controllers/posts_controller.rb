@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     set_post
     set_blog
     if @post.update(post_params)
-      redirect_to blog_posts_path(@blog), notice: 'Post was successfully updated.'
+      redirect_to blog_path(@blog), notice: 'Post was successfully updated.'
     else
       render action: 'edit'
     end
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
   def destroy
     @blog = Blog.find(set_post.blog)
     if set_post.destroy
-      redirect_to blog_posts_path(@blog), notice: 'Post deleted.'
+      redirect_to blog_path(@blog), notice: 'Post deleted.'
     else
       render action: 'index'
     end
