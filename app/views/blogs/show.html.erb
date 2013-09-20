@@ -1,5 +1,9 @@
 <h1>Display Blog</h1>
-<a href="/blogs/<%= @blog['id'] %>/posts/new"><button class="btn btn-large btn-info">New Post</button></a>
+
+<% if signed_in? %>
+	<a href="/blogs/<%= @blog['id'] %>/posts/new"><button class="btn btn-large btn-info">New Post</button></a>
+<% else %>
+<% end %>
 
 <p id="notice"><%= notice %></p>
 

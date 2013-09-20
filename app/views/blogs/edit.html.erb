@@ -6,9 +6,9 @@
 
 <%= simple_form_for @blog do |f| %>
   <%= f.input :name %>
-  <%= f.input :description, :as => :text %>
-  <%= f.button :submit %>
+  <%= f.input :description, :as => :text, :as => :text, :input_html => { class: 'input-large', :rows => 5 } %>
+  <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
 <% end %>
 
-<%= link_to 'Show', @blog %> |
+<%= link_to 'Show', @blog %> | 
 <%= link_to 'Back', blogs_path %>

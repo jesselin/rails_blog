@@ -20,7 +20,8 @@ class SessionsController < ApplicationController
 
   def destroy
   	sign_out
-  	redirect_to signin_path
+  	# redirect_to signin_path
+    redirect_to blogs_path, notice: "You are now logged out."
   end
 
 end
