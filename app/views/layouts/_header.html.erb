@@ -6,18 +6,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <!-- <a class="brand" href="/">OMRails</a> -->
             <a class="brand" href="/">Blogotastic</a>
 
             <div class="nav-collapse">
                 
                 <ul class="nav">
-                    <!-- <li><a href="/users/">Users</a></li> -->
                     <!-- <li><a href="/blogs/">Home</a></li> -->
                 </ul>
 
                 <ul class="nav pull-right">
                     <% if signed_in? %>
+                        <li><a href="/users/<%= current_user.id %>">Profile</a></li>
                         <li><a href="/signout">Logout</a></li>
                     <% else %>
                         <li><a href="/signup">Sign Up</a></li>

@@ -9,18 +9,19 @@
 	<h2>My Blogs:</h2>
 	<table class="table table-striped">
 		<tr>
-			<th>Read</th>
+			<th>Blog</th>
+			<th></th>
 			<th>ID</th>
 			<th>Blog Name</th>
 			<th>Description</th>
 			<th>Actions</th>
 			<th></th>
-			<th></th>
 		</tr>
 		<% User.where('id = ?', current_user.id).each do |user|
 			user.blogs.each do |blog| %>
 				<tr>
-					<td><a href="/blogs/<%= blog['id'] %>/"><button class="btn btn-small btn-primary">Read</button></a></td>
+					<td><a href="/blogs/<%= blog['id'] %>/"><button class="btn btn-small btn-primary">Blog</button></a></td>
+					<td><a href="/blogs/<%= blog['id'] %>/posts/new"><button class="btn btn-small btn-info">New Post</button></a></td>
 					<td><%= blog['id'] %></td>		
 				    <td><%= blog['name'] %></td>
 				    <td><%= blog['description'] %></td>
@@ -32,7 +33,6 @@
 							<input class="btn btn-small btn-danger" type="submit" value="Delete" />
 						</form>
 				    </td>
-				    <td><a href="/blogs/<%= blog['id'] %>/posts/new"><button class="btn btn-small btn-info">New Post</button></a></td>
 				</tr>
 			<% end %>  
 		<% end %>     
@@ -42,7 +42,7 @@
 	<h2>Read Blogs by other users!</h2>
 	<table class="table table-striped">
 		<tr>
-			<th>Read</th>
+			<th>Blog</th>
 			<th>ID</th>
 			<th>Blog Name</th>
 			<th>Description</th>
@@ -73,7 +73,7 @@
 
 	<table class="table table-striped">
 		<tr>
-			<th>Read</th>
+			<th>Blog</th>
 			<th>ID</th>
 			<th>Blog Name</th>
 			<th>Description</th>

@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   def index
+    @posts = Post.all
     @blogs = Blog.all
     @owners = Owner.all
     # @owner = Owner.find(params[:id])
@@ -26,6 +27,9 @@ class BlogsController < ApplicationController
 
   def show
     set_blog
+    @posts = Post.all.where("blog_id = ?", set_blog.id).order("created_at DESC")
+    # @post_owner =
+    # @blog_owner =
   end
 
   def edit

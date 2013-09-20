@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post[:user_id] = current_user.id
     @post[:blog_id] = set_blog.id
     if @post.save
-      redirect_to blog_post_path(@blog, @post), notice: 'Post was successfully created.'
+      redirect_to blog_path(@blog), notice: 'Post was successfully created.'
     else
       render action: 'new'
     end
