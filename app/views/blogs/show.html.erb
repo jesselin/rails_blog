@@ -13,7 +13,7 @@
 <% @posts.each do |post| %>
 	<div class="span 12">
 		<p>Posted by 
-			<%= @blog.users.first.first_name%> <%= @blog.users.first.last_name%>
+			<strong><%= @blog.users.first.first_name%> <%= @blog.users.first.last_name%></strong>
 			at <%= post['created_at'] %>
 			<% if signed_in? && (@blog.owners.first.user_id == current_user.id) %> - 
 				<%= link_to 'Edit', edit_blog_post_path(@blog, post) %> | 
@@ -31,7 +31,7 @@
 
 	    	<% Message.all.where("post_id = ?", post.id).order("created_at ASC").each do |message| %>
 				<p>Message authored by 
-					<%= message.author %> 
+					<strong><%= message.author %></strong>
 					at <%= message.created_at %>
 					<% if signed_in? %>
 						<% if @blog.owners.first.user_id == current_user.id %> - 
