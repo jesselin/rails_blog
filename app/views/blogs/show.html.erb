@@ -33,12 +33,11 @@
 				<p>Message authored by 
 					<%= message.author %> 
 					at <%= message.created_at %>
-					<% if signed_in? && (@blog.owners.first.user_id == current_user.id) %> - 
-						<%= link_to 'Delete', blog_post_message_path(@blog, post, message), method: :delete, data: { confirm: 'Are you sure?'} %>
-					<% else %>
-						<% if signed_in? && (message.user_id == current_user.id) %> - 
+					<% if signed_in? %>
+						<% if @blog.owners.first.user_id == current_user.id %> - 
 							<%= link_to 'Delete', blog_post_message_path(@blog, post, message), method: :delete, data: { confirm: 'Are you sure?'} %>
-						<% else %>
+						<% elsif message.user_id == current_user.id %> - 
+							<%= link_to 'Delete', blog_post_message_path(@blog, post, message), method: :delete, data: { confirm: 'Are you sure?'} %>
 						<% end %>
 					<% end %>
 				</p>
