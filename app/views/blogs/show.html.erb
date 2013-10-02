@@ -11,7 +11,6 @@
 <% end %>
 
 <p class="notice"><%= notice %></p>
-<p class="error"><%= error %></p>
 
 <br>
 
@@ -19,8 +18,12 @@
 
 	<p>Posted by 
 		<%= @blog.users.first.first_name%> <%= @blog.users.first.last_name%>
-		at <%= post['created_at'] %> - 
-		<%= link_to 'Edit', edit_blog_post_path(@blog, post) %>
+		at <%= post['created_at'] %>
+		<% if signed_in? %> - 
+			<%= link_to 'Edit', edit_blog_post_path(@blog, post) %> | 
+			<%= link_to 'Delete', blog_post_path(post.blog, post), method: :delete, data: { confirm: 'Are you sure?'} %>
+		<% else %>
+		<% end %>
 	</p>
 	
 	<div class="well">
