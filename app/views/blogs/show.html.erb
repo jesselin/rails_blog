@@ -1,7 +1,6 @@
 <h1><%= @blog['name'] %></h1>
 <h3><%= @blog['description'] %></h3>
 
-
 <% if signed_in? %>
 <% else %>
 <% end %>
@@ -11,15 +10,15 @@
 <% else %>
 <% end %>
 
-<p id="notice"><%= notice %></p>
+<p class="notice"><%= notice %></p>
+<p class="error"><%= error %></p>
+
 <br>
 
 <% @posts.each do |post| %>
 
 	<p>Posted by 
-		<% User.where("id = '#{post.user_id}'").each do |post_user| %>
-			<%= post_user.first_name %> <%= post_user.last_name %>
-		<% end %>
+		<%= @blog.users.first.first_name%> <%= @blog.users.first.last_name%>
 		at <%= post['created_at'] %> - 
 		<%= link_to 'Edit', edit_blog_post_path(@blog, post) %>
 	</p>

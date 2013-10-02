@@ -3,9 +3,11 @@
 <% if signed_in? %>
 	<h1>Welcome <%= current_user.first_name %>!</h1>
 	<a href="/blogs/new"><button class="btn btn-large btn-info">New Blog</button></a>
-	<p id="notice"><%= flash[:notice] %></p>
-	<br>
 
+	<p class="notice"><%= flash[:notice] %></p>
+	<p class="error"><%= flash[:error] %></p>
+
+	<br>
 	<h2>My Blogs:</h2>
 	<table class="table table-striped">
 		<tr>
@@ -80,5 +82,4 @@
 			<% end %> 	
 		<% end %>     
 	</table>
-
 <% end %>

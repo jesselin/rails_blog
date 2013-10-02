@@ -1,10 +1,11 @@
 <h1>New Post</h1>
 
-<p id="notice"><%= @post.errors.full_messages.first if @post.errors.any? %></p>
+<p class="error"><%= @post.errors.full_messages.first if @post.errors.any? %></p>
+<p class="notice"><%= notice %></p>
 
 <%= simple_form_for([@blog, @post]) do |f| %>
   <%= f.input :title %>
-  <%= f.input :content, :as => :text, :as => :text, :input_html => { class: 'input-large', :rows => 10 } %>
+  <%= f.input :content, :as => :text, :input_html => { class: 'input-large', :rows => 10 } %>
   <%= f.button :submit, value: 'Create Post' , :class => 'btn btn-large btn-primary' %>
 <% end %>
 

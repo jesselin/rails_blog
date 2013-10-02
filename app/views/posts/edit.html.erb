@@ -2,7 +2,8 @@
 
 <h1>Update Post #<%= @post['id'] %></h1>
 
-<p id="notice"><%= @post.errors.full_messages.first if @post.errors.any? %></p>
+<p class="error"><%= @post.errors.full_messages.first if @post.errors.any? %></p>
+<p class="notice"><%= notice %></p>
 
 <%= simple_form_for([@blog, @post]) do |f| %>
   <%= f.input :title %>
@@ -10,10 +11,8 @@
   <%= f.button :submit, value: 'Update Post' , :class => 'btn btn-large btn-primary' %>
 <% end %>
 
-<form action="/blogs/<%= @blog.id %>/posts/<%= @post['id'] %>" method="post">  
-	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<input type='hidden' name="_method" value="delete">
-	<input class="btn btn-small btn-danger" type="submit" value="Delete" />
-</form>
+<%= link_to "Delete", blog_post_path(@post.blog, @post), confirm: "Are you sure?", method: :delete, class: 'btn btn-small btn-danger' %>
+
+<br><br>
 
 <%= link_to 'Back', blog_path(@blog) %>

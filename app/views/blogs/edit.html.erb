@@ -2,7 +2,8 @@
 
 <h1>Update blog #<%= @blog['id'] %></h1>
 
-<p id="notice"><%= @blog.errors.full_messages.first if @blog.errors.any? %></p>
+<p class="error"><%= @blog.errors.full_messages.first if @blog.errors.any? %></p>
+<p class="notice"><%= notice %></p>
 
 <%= simple_form_for @blog do |f| %>
   <%= f.input :name %>
@@ -10,5 +11,9 @@
   <%= f.button :submit, :class => 'btn btn-large btn-primary' %>
 <% end %>
 
-<%= link_to 'Show', @blog %> | 
-<%= link_to 'Back', blogs_path %>
+<%= link_to 'Delete', @blog, method: :delete, class: 'btn btn-small btn-danger', data: { confirm: 'Are you sure?'} %>
+<br><br>
+
+<%= link_to 'Back', blogs_path %> |
+<%= link_to 'Show', @blog %>
+
