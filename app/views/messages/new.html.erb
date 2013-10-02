@@ -1,2 +1,12 @@
-<h1>Messages#new</h1>
-<p>Find me in app/views/messages/new.html.erb</p>
+<h1>New Message</h1>
+
+<p class="error"><%= @post.errors.full_messages.first if @post.errors.any? %></p>
+<p class="notice"><%= notice %></p>
+
+<%= simple_form_for([@blog, @post]) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content, :as => :text, :input_html => { class: 'input-large', :rows => 10 } %>
+  <%= f.button :submit, value: 'Create Post' , :class => 'btn btn-large btn-primary' %>
+<% end %>
+
+<%= link_to 'Back', blog_posts_path(@blog, @post) %>

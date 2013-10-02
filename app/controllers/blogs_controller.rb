@@ -27,6 +27,7 @@ class BlogsController < ApplicationController
   def show
     set_blog
     @posts = Post.all.where("blog_id = ?", set_blog.id).order("created_at DESC")
+    @message = Message.new
   end
 
   def edit

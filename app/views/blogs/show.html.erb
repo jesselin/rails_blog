@@ -5,7 +5,7 @@
 <% else %>
 <% end %>
 
-<% if signed_in? %>
+<% if signed_in? && (@blog.owners.first.user_id == current_user.id) %>
 	<a href="/blogs/<%= @blog['id'] %>/posts/new"><button class="btn btn-large btn-info">New Post</button></a>
 <% else %>
 <% end %>
@@ -15,25 +15,46 @@
 <br>
 
 <% @posts.each do |post| %>
+	<div class="span 12">
+		<p>Posted by 
+			<%= @blog.users.first.first_name%> <%= @blog.users.first.last_name%>
+			at <%= post['created_at'] %>
+			<% if signed_in? && (@blog.owners.first.user_id == current_user.id) %> - 
+				<%= link_to 'Edit', edit_blog_post_path(@blog, post) %> | 
+				<%= link_to 'Delete', blog_post_path(post.blog, post), method: :delete, data: { confirm: 'Are you sure?'} %>
+			<% else %>
+			<% end %>
+		</p>
+		
+		<div class="well">
+	    	<h4><%= post['title'] %></h4>
+	    	<p><%= post['content'] %></p>
+	    </div>
+	    
+	    <div class="span9 offset2">
 
-	<p>Posted by 
-		<%= @blog.users.first.first_name%> <%= @blog.users.first.last_name%>
-		at <%= post['created_at'] %>
-		<% if signed_in? %> - 
-			<%= link_to 'Edit', edit_blog_post_path(@blog, post) %> | 
-			<%= link_to 'Delete', blog_post_path(post.blog, post), method: :delete, data: { confirm: 'Are you sure?'} %>
-		<% else %>
-		<% end %>
-	</p>
-	
-	<div class="well">
-    	<h4><%= post['title'] %></h4>
-    	<p><%= post['content'] %></p>
-    </div>
+	    	<% Message.all.where("post_id = ?", post.id).order("created_at ASC").each do |message| %>
+				<p>Message authored by 
+					<%= message.author %> 
+					at <%= message.created_at %>
+					<% if signed_in? && (@blog.owners.first.user_id == current_user.id) %> - 
+						<%= link_to 'Delete', blog_post_message_path(@blog, post, message), method: :delete, data: { confirm: 'Are you sure?'} %>
+					<% else %>
+					<% end %>
+				</p>
+				<div class="well">
+	    			<%= message.message %>
+	    		</div>
+	    	<% end %>	
 
-	<br> 
+	    	<% if signed_in? %>
+				<%= simple_form_for([@blog, post, @message]) do |f| %>
+				  <%= f.input :message, :as => :text, label: 'Leave a message for this post:', :input_html => { class: 'input-large', id: 'new_message_input', :rows => 2 } %>
+				  <%= f.button :submit, class: "btn btn-small btn-primary pull-right", value: 'Leave Message' %>
+				<% end %>
+			<% else %>
+			<% end %>	
+
+		</div>
+	</div>
 <% end %>
-
-<br><br>
-
-<%= link_to 'Back', blogs_path %>

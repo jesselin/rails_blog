@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessor :password
 
-  has_many :messages
-  has_many :posts
-  has_many :owners,:dependent=>:destroy
+  has_many :messages, :dependent=>:destroy
+  has_many :posts, :dependent=>:destroy
+  has_many :owners, :dependent=>:destroy
   has_many :blogs, through: :owners
 
 
